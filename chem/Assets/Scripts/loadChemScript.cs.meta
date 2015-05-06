@@ -1,10 +1,14 @@
 fileFormatVersion: 2
-guid: 9b6ce232d65ef4ce887b6a4cab1933b1
-timeCreated: 1430870542
+guid: 32ebca47cfcc9434c804d8646aac1f79
+timeCreated: 1430893505
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - Hydrogen: {fileID: 492834, guid: b0706c138480240cfb8b09674e5be9a4, type: 2}
+  - Carbon: {instanceID: 0}
+  - Nitrogen: {instanceID: 0}
+  - Oxygen: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
