@@ -46,7 +46,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Hydrogen.cs" />
      <Compile Include="Assets\LeapMotion+OVR\DemoResources\Scripts\BlocksPlaneGenerator.cs" />
      <Compile Include="Assets\LeapMotion+OVR\DemoResources\Scripts\MovementManager.cs" />
      <Compile Include="Assets\LeapMotion+OVR\DemoResources\Scripts\RandomBlocksGenerator.cs" />
@@ -113,9 +112,8 @@
      <Compile Include="Assets\OVR\Scripts\Util\OVRScreenFade.cs" />
      <Compile Include="Assets\OVR\Scripts\Util\OVRUGUI.cs" />
      <Compile Include="Assets\OVR\Scripts\Util\OVRVisionGuide.cs" />
-     <Compile Include="Assets\Scripts\testScript.cs" />
-     <Compile Include="Assets\initScript.cs" />
-     <Compile Include="Assets\loadChemScript.cs" />
+     <Compile Include="Assets\Scripts\initScript.cs" />
+     <Compile Include="Assets\Scripts\loadChemScript.cs" />
      <None Include="Assets\LeapMotion\Resources\LeapIRUndistorted.shader" />
      <None Include="Assets\Plugins\donotdelete.txt" />
      <None Include="Assets\LeapMotion\Materials\Sources\Shaders\Toony-Basic.shader" />
