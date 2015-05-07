@@ -12,7 +12,7 @@ public class loadChemScript : MonoBehaviour
 	void Start ()
 	{	
 		Debug.Log ("loadChemScript called");
-		loadFile ("Assets/sdf/aspirin.sdf");
+		loadFile ("Assets/sdf/caffeine.sdf");
 	}
 	
 //	// Update is called once per frame
@@ -28,31 +28,35 @@ public class loadChemScript : MonoBehaviour
 			int atoms = 0;
 			int bonds = 0;
 			int lineNum = 1;
+			float Xmin = 0, Xmax = 0, Ymin = 0, Ymax = 0, Zmin = 0, Zmax = 0;
 
 			StreamReader sr = new StreamReader (filePath);
 
 			while (!sr.EndOfStream) {
 				line = sr.ReadLine ();
-//				Debug.Log ("line: " + line + "\nline type: " + lineNum);
 				parsedLine = parseLine (line);
 
 				// Line 4 contains number of atoms and bonds
 				if (lineNum == 4) {
-					foreach (string s in parsedLine) {
-						Debug.Log ("parse line parsed string segment: " + s);
-					}
+//					foreach (string s in parsedLine) {
+//						Debug.Log ("parse line parsed string segment: " + s);
+//					}
 					atoms = int.Parse(parsedLine[0]);
 					bonds = int.Parse(parsedLine[1]); // bond functionallity not implemented
 				}
 
 				// The next n=atoms lines contain coordinate information. Pass entire string into RenderAtomFromLine
 				else if (lineNum > 4 && lineNum <= (4+atoms) ) {
-					Debug.Log ("line num " + lineNum);
+					foreach (string s in parsedLine) {
+						Debug.Log ("parse line parsed string segment: " + s);
+					}
+					updateDimensions(ref Xmin, ref Xmax, ref Ymin, ref Ymax, ref Zmin, ref Zmax, parsedLine);
 					renderAtomFromLine(parsedLine);
 				}
-
 				lineNum++;
 			}
+			// Dimension updated at this point
+
 
 			return true;
 		} catch (IOException e) {
@@ -70,14 +74,19 @@ public class loadChemScript : MonoBehaviour
 		Transform h = Instantiate (Atom, new Vector3 (e.x, e.y, e.z), Quaternion.identity) as Transform;
 		GameObject hAtom = h.gameObject;
 		hAtom.GetComponent<Rigidbody> ().useGravity = false;
-		if (e.symbol == "H") {
+		switch (e.symbol) {
+		case "H":
 			hAtom.GetComponent<Renderer> ().material.color = Color.blue;
-		} else if (e.symbol == "C") {
+			break;
+		case "C":
 			hAtom.GetComponent<Renderer> ().material.color = Color.white;
-		} else if (e.symbol == "O") {	
+			break;
+		case "O":
 			hAtom.GetComponent<Renderer> ().material.color = Color.red;
-		} else if (e.symbol == "N") {
+			break;
+		case "N":
 			hAtom.GetComponent<Renderer> ().material.color = Color.yellow;
+			break;
 		}
 
 		return true;
@@ -93,4 +102,15 @@ public class loadChemScript : MonoBehaviour
 //				}
 		return parsedLine;
 	}
+
+	private void updateDimensions (ref float Xmin, ref float Xmax, ref float Ymin, ref float Ymax, ref float Zmin, ref float Zmax, string[] parsedLine) 
+	{
+		Xmin = Mathf.Min (Xmin, float.Parse (parsedLine [0]));
+		Xmax = Mathf.Max (Xmax, float.Parse (parsedLine [0]));
+		Ymin = Mathf.Min (Ymin, float.Parse (parsedLine [1]));
+		Ymax = Mathf.Max (Ymax, float.Parse (parsedLine [1]));
+		Zmin = Mathf.Min (Zmin, float.Parse (parsedLine [2]));
+		Zmax = Mathf.Max (Zmax, float.Parse (parsedLine [2]));
+	}
+
 }

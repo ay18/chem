@@ -115,6 +115,7 @@
      <Compile Include="Assets\Scripts\Element.cs" />
      <Compile Include="Assets\Scripts\initScript.cs" />
      <Compile Include="Assets\Scripts\loadChemScript.cs" />
+     <Compile Include="Assets\leapControl.cs" />
      <None Include="Assets\LeapMotion\Resources\LeapIRUndistorted.shader" />
      <None Include="Assets\Plugins\donotdelete.txt" />
      <None Include="Assets\LeapMotion\Materials\Sources\Shaders\Toony-Basic.shader" />
