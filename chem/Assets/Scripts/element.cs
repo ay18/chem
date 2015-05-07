@@ -13,13 +13,14 @@ public class Element
 	// color maybe?
 
 	private float scaleFactor = 0.02f;
+	private float distanceScale = 0.7f;
 
 
 	public Element (string[] parsedLine) {
-		this.symbol = parsedLine [0].ToUpper();
-		this.x = float.Parse(parsedLine [1]);
-		this.y = float.Parse(parsedLine [2]);
-		this.z = float.Parse(parsedLine [3]);
+		this.symbol = parsedLine [3].ToUpper();
+		this.x = float.Parse(parsedLine [0]) * distanceScale;
+		this.y = float.Parse(parsedLine [1]) * distanceScale;
+		this.z = float.Parse(parsedLine [2]) * distanceScale;
 		
 		// DEFINE ELEMENTS HERE
 		// switch statement based on chemical symbol

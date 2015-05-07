@@ -6,13 +6,13 @@ using System.Text;
 public class loadChemScript : MonoBehaviour
 {
 	
-	public Transform Hydrogen;
+	public Transform Atom;
 	
 	// Use this for initialization
 	void Start ()
 	{	
 		Debug.Log ("loadChemScript called");
-		Load ("Assets/xyz/caffeine.xyz");
+		loadFile ("Assets/sdf/aspirin.sdf");
 	}
 	
 //	// Update is called once per frame
@@ -20,20 +20,38 @@ public class loadChemScript : MonoBehaviour
 //	
 //	}
 
-	private bool Load (string filePath)
+	private bool loadFile (string filePath)
 	{
 		try {
 			string line;
-			int lineType = 0;
+			string[] parsedLine;
+			int atoms = 0;
+			int bonds = 0;
+			int lineNum = 1;
 
 			StreamReader sr = new StreamReader (filePath);
 
 			while (!sr.EndOfStream) {
 				line = sr.ReadLine ();
-				Debug.Log ("line: " + line + "\nline type: " + lineType);
-				RenderAtomFromLine (line, lineType);
-				if (lineType < 2)
-					lineType++;
+//				Debug.Log ("line: " + line + "\nline type: " + lineNum);
+				parsedLine = parseLine (line);
+
+				// Line 4 contains number of atoms and bonds
+				if (lineNum == 4) {
+					foreach (string s in parsedLine) {
+						Debug.Log ("parse line parsed string segment: " + s);
+					}
+					atoms = int.Parse(parsedLine[0]);
+					bonds = int.Parse(parsedLine[1]); // bond functionallity not implemented
+				}
+
+				// The next n=atoms lines contain coordinate information. Pass entire string into RenderAtomFromLine
+				else if (lineNum > 4 && lineNum <= (4+atoms) ) {
+					Debug.Log ("line num " + lineNum);
+					renderAtomFromLine(parsedLine);
+				}
+
+				lineNum++;
 			}
 
 			return true;
@@ -44,43 +62,22 @@ public class loadChemScript : MonoBehaviour
 	}
 
 	// lineType specifies the part of an xyz file being read in.
-	// 0, the first line, specifies atom count
-	// 1, the second line, specifies the chemical name
-	// 2, the third line and beyond, specifies each atom's coordinates
-	private bool RenderAtomFromLine (string line, int lineType)
+	// In SDF files, first three lines not important
+	private bool renderAtomFromLine (string[] parsedLine)
 	{
-		switch (lineType) {
-		case 0:
-			Debug.Log ("RenderAtom lineType " + lineType);
+		Element e = new Element(parsedLine);
 
-			break;
-
-		case 1:
-			Debug.Log ("RenderAtom lineType " + lineType);
-
-			break;
-
-		case 2:
-			Debug.Log ("RenderAtom lineType " + lineType);
-			string[] parsedLine = parseLine (line);
-			Element e = new Element(parsedLine);
-
-			Transform h = Instantiate (Hydrogen, new Vector3 (e.x, e.y, e.z), Quaternion.identity) as Transform;
-			GameObject hAtom = h.gameObject;
-			hAtom.GetComponent<Rigidbody> ().useGravity = false;
-			if (e.symbol == "H") {
-				hAtom.GetComponent<Renderer> ().material.color = Color.blue;
-			} else if (e.symbol == "C") {
-				hAtom.GetComponent<Renderer> ().material.color = Color.white;
-			} else if (e.symbol == "O") {	
-				hAtom.GetComponent<Renderer> ().material.color = Color.red;
-			} else if (e.symbol == "N") {
-				hAtom.GetComponent<Renderer> ().material.color = Color.yellow;
-			}
-
-			break;
-
-		//no default
+		Transform h = Instantiate (Atom, new Vector3 (e.x, e.y, e.z), Quaternion.identity) as Transform;
+		GameObject hAtom = h.gameObject;
+		hAtom.GetComponent<Rigidbody> ().useGravity = false;
+		if (e.symbol == "H") {
+			hAtom.GetComponent<Renderer> ().material.color = Color.blue;
+		} else if (e.symbol == "C") {
+			hAtom.GetComponent<Renderer> ().material.color = Color.white;
+		} else if (e.symbol == "O") {	
+			hAtom.GetComponent<Renderer> ().material.color = Color.red;
+		} else if (e.symbol == "N") {
+			hAtom.GetComponent<Renderer> ().material.color = Color.yellow;
 		}
 
 		return true;
@@ -91,12 +88,9 @@ public class loadChemScript : MonoBehaviour
 	{
 		string[] parsedLine;
 		parsedLine = line.Split (new char[0], System.StringSplitOptions.RemoveEmptyEntries);
-//		foreach (string s in parsedCoordinates) {
-//			Debug.Log ("createAtomCoordinates parsed string segment: " + s);
-//		}
-		if (parsedLine.Length != 4) {
-			throw new System.InvalidOperationException ("xyz input file error. coordinates should be (symbol, x, y, z).");
-		}
+		//				foreach (string s in parsedLine) {
+//					Debug.Log ("parse line parsed string segment: " + s);
+//				}
 		return parsedLine;
 	}
 }
