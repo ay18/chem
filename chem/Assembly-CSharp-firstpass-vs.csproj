@@ -85,7 +85,6 @@
      <None Include="Assets\LeapMotion\Dependencies.txt" />
      <None Include="Assets\LeapMotion\Materials\Sources\Shaders\Toony-BasicOutline.shader" />
      <None Include="Assets\Resources\Shaders\fluorineShader.shader" />
-     <None Include="Assets\xyz\dummy.txt" />
      <None Include="Assets\Resources\Shaders\bromineShader.shader" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
      <None Include="Assets\LeapMotion\Materials\Sources\Shaders\Toony-LightedOutline.shader" />

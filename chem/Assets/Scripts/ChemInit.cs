@@ -3,7 +3,8 @@ using System.Collections;
 using System.IO;
 using System.Text;
 using UnityEngine.UI;
-
+using System.Collections.Generic;
+using System.Threading;
 
 // Initializer and main controller
 public class ChemInit : MonoBehaviour
@@ -15,6 +16,7 @@ public class ChemInit : MonoBehaviour
 	private bool fileLoaded = false;
 	private GameObject atomContainer = null;
 	[SerializeField] private InputField input;
+	[SerializeField] private Text uiText;
 
 	// Use this for initialization
 	void Start ()
@@ -52,11 +54,13 @@ public class ChemInit : MonoBehaviour
 			int atoms = 0;
 			int bonds = 0;
 			int lineNum = 1;
+			Dictionary<string,int> atomCounter = new Dictionary<string, int>();	
 			// molecule dimensions, min and max for x y z
 			// game object to group atoms
 
+//			FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
 			StreamReader sr = new StreamReader (filePath);
-
+//			StreamReader sr = new StreamReader(fs);
 			while (!sr.EndOfStream) {
 				line = sr.ReadLine ();
 				parsedLine = parseLine (line);
@@ -70,11 +74,20 @@ public class ChemInit : MonoBehaviour
 				// The next n=atoms lines contain coordinate information. Pass entire string into RenderAtomFromLine
 				else if (lineNum > 4 && lineNum <= (4+atoms) ) {
 					// molDim contains min and max for x y z
-					updateDimensions(ref molDim[0], ref molDim[1], ref molDim[2], ref molDim[3], ref molDim[4], ref molDim[5], parsedLine);
-					renderAtomFromLine(parsedLine, atomContainer);
+					Thread t1 = new Thread(()=>updateDimensions(ref molDim[0], ref molDim[1], ref molDim[2], ref molDim[3], ref molDim[4], ref molDim[5], parsedLine));
+					t1.Start();
+					//updateDimensions(ref molDim[0], ref molDim[1], ref molDim[2], ref molDim[3], ref molDim[4], ref molDim[5], parsedLine);
+					renderAtomFromLine(parsedLine, atomContainer, atomCounter);
 				}
 				lineNum++;
 			}
+
+			// Get atom count from dictionary
+			string updatedUIText = "";
+			foreach (string key in atomCounter.Keys) {
+				updatedUIText += key + " " + atomCounter[key] + "\n";
+			}
+			uiText.text = updatedUIText;
 
 			// Dimension updated at this point, initialize camera controller
 			camCtrl.adjustCameraPosition();
@@ -88,7 +101,7 @@ public class ChemInit : MonoBehaviour
 
 	// lineType specifies the part of an xyz file being read in.
 	// In SDF files, first three lines not important
-	private bool renderAtomFromLine (string[] parsedLine, GameObject container)
+	private bool renderAtomFromLine (string[] parsedLine, GameObject container, Dictionary<string, int> atomCounter)
 	{
 		Shader atomShader;
 		Element e = new Element(parsedLine);
@@ -100,6 +113,12 @@ public class ChemInit : MonoBehaviour
 		atom.name = e.name;
 		at.parent = container.transform;
 		at.localScale = new Vector3 (e.radii, e.radii, e.radii);
+
+		if (atomCounter.ContainsKey (e.name)) {
+			atomCounter[e.name]++;
+		} else {
+			atomCounter.Add(e.name, 1);
+		}
 
 		atom.GetComponent<Rigidbody> ().useGravity = false;
 		switch (e.symbol) {
@@ -121,7 +140,7 @@ public class ChemInit : MonoBehaviour
 		case "NA":
 			atomShader = Shader.Find("Custom/sodiumShader");
 			break;
-		case "Mg":
+		case "MG":
 			atomShader = Shader.Find("Custom/magnesiumShader");
 			break;
 		case "SI":

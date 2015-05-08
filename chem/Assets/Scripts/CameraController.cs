@@ -30,7 +30,6 @@ public class CameraController : MonoBehaviour {
 
 
 	public void adjustCameraPosition() {
-		debugPrintDimensions();
 		Vector3 newPosition = new Vector3(0, 0, -10);
 		cam.transform.position = newPosition;
 	}
