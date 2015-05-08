@@ -13,7 +13,7 @@ public class Element
 	// color maybe?
 
 	private float scaleFactor = 0.02f;
-	private float distanceScale = 0.7f;
+	private float distanceScale = 0.75f;
 
 
 	public Element (string[] parsedLine) {

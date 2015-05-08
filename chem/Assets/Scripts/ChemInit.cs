@@ -6,7 +6,7 @@ using System.Text;
 public class ChemInit : MonoBehaviour
 {
 	
-	public Transform Atom;
+	public Transform AtomTransform;
 	
 	// Use this for initialization
 	void Start ()
@@ -58,6 +58,7 @@ public class ChemInit : MonoBehaviour
 
 			// Dimension updated at this point, initialize camera controller
 			CameraControl camCtrl = new CameraControl(molDim);
+			camCtrl.adjustCameraPosition();
 
 			return true;
 		} catch (IOException e) {
@@ -72,8 +73,11 @@ public class ChemInit : MonoBehaviour
 	{
 		Element e = new Element(parsedLine);
 
-		Transform h = Instantiate (Atom, new Vector3 (e.x, e.y, e.z), Quaternion.identity) as Transform;
+		Transform h = Instantiate (AtomTransform, new Vector3 (e.x, e.y, e.z), Quaternion.identity) as Transform;
 		GameObject hAtom = h.gameObject;
+		hAtom.name = e.symbol;
+		h.localScale = new Vector3 (e.radii, e.radii, e.radii);
+
 		hAtom.GetComponent<Rigidbody> ().useGravity = false;
 		switch (e.symbol) {
 		case "H":
