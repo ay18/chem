@@ -152,3 +152,53 @@ Cmd: compileSnippet
   api=0 type=0 insize=7156 outsize=4345 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF ok=1
 Cmd: compileSnippet
   api=0 type=1 insize=7156 outsize=6 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF ok=1
+Cmd: compileSnippet
+  error: 2 plat 0 at (123): 'gl_' : reserved built-in name\nCompiling Vertex program
+  api=0 type=0 insize=7419 outsize=0 kw= ok=0
+Cmd: compileSnippet
+  error: 2 plat 0 at (123): 'gl_' : reserved built-in name\nCompiling Vertex program
+  api=0 type=0 insize=7419 outsize=0 kw= ok=0
+Cmd: compileSnippet
+  error: 2 plat 0 at (123): 'gl_' : reserved built-in name\nCompiling Vertex program
+  api=0 type=0 insize=7419 outsize=0 kw= ok=0
+Cmd: compileSnippet
+  error: 2 plat 0 at (123): 'gl_' : reserved built-in name\nCompiling Vertex program
+  api=0 type=0 insize=7419 outsize=0 kw= ok=0
+Cmd: compileSnippet
+  error: 2 plat 0 at (123): 'gl_' : reserved built-in name\nCompiling Vertex program
+  api=0 type=0 insize=7419 outsize=0 kw= ok=0
+Cmd: compileSnippet
+  error: 2 plat 0 at (123): 'gl_' : reserved built-in name\nCompiling Vertex program
+  api=0 type=0 insize=7419 outsize=0 kw= ok=0
+Cmd: compileSnippet
+  error: 2 plat 0 at (123): 'gl_' : reserved built-in name\nCompiling Vertex program
+  api=0 type=0 insize=7419 outsize=0 kw= ok=0
+Cmd: compileSnippet
+  error: 2 plat 0 at (123): 'gl_' : reserved built-in name\nCompiling Vertex program
+  api=0 type=0 insize=7419 outsize=0 kw= ok=0
+Cmd: compileSnippet
+  error: 2 plat 0 at (123): 'gl_' : reserved built-in name\nCompiling Vertex program
+  api=0 type=0 insize=7419 outsize=0 kw= ok=0
+Cmd: compileSnippet
+  error: 2 plat 0 at (123): 'gl_' : reserved built-in name\nCompiling Vertex program
+  api=0 type=0 insize=7419 outsize=0 kw= ok=0
+Cmd: compileSnippet
+  api=0 type=0 insize=3975 outsize=2366 kw=DIRECTIONAL ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=3975 outsize=6 kw=DIRECTIONAL ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=7156 outsize=4832 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF VERTEXLIGHT_ON ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=3975 outsize=2828 kw=SPOT ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=3975 outsize=2569 kw=DIRECTIONAL_COOKIE ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=3975 outsize=6 kw=SPOT ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=3975 outsize=6 kw=DIRECTIONAL_COOKIE ok=1
+Cmd: compileSnippet
+  error: 2 plat 0 at (123): 'gl_' : reserved built-in name\nCompiling Vertex program
+  api=0 type=0 insize=7419 outsize=0 kw= ok=0
+Cmd: compileSnippet
+  error: 2 plat 0 at (123): 'gl_' : reserved built-in name\nCompiling Vertex program
+  api=0 type=0 insize=7419 outsize=0 kw= ok=0
