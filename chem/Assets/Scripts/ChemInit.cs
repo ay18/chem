@@ -3,10 +3,13 @@ using System.Collections;
 using System.IO;
 using System.Text;
 
+
+// Initializer and main controller
 public class ChemInit : MonoBehaviour
 {
 	
 	public Transform AtomTransform;
+	private CameraController camCtrl;
 
 	// Use this for initialization
 	void Start ()
@@ -15,15 +18,15 @@ public class ChemInit : MonoBehaviour
 		loadFile ("Assets/sdf/atp.sdf");
 	}
 	
-//	// Update is called once per frame
-//	void Update () {s
-//	
-//	}
+	// Update is called once per frame
+	void Update () {
+		camCtrl.trackFrame ();
+		camCtrl.cameraOrbit();
+	}
 
 	private bool loadFile (string filePath)
 	{
 		try {
-
 			// Variables
 			string line;
 			string[] parsedLine;
@@ -42,9 +45,6 @@ public class ChemInit : MonoBehaviour
 
 				// Line 4 contains number of atoms and bonds
 				if (lineNum == 4) {
-//					foreach (string s in parsedLine) {
-//						Debug.Log ("parse line parsed string segment: " + s);
-//					}
 					atoms = int.Parse(parsedLine[0]);
 					bonds = int.Parse(parsedLine[1]); // bond functionallity not implemented
 				}
@@ -59,7 +59,7 @@ public class ChemInit : MonoBehaviour
 			}
 
 			// Dimension updated at this point, initialize camera controller
-			CameraControl camCtrl = new CameraControl(molDim);
+			camCtrl = new CameraController(molDim);
 			camCtrl.adjustCameraPosition();
 
 			return true;

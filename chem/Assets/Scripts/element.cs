@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
+
+// Template for element definitions
 public class Element
 {
 
@@ -22,8 +24,7 @@ public class Element
 		this.y = float.Parse(parsedLine [1]) * distanceScale;
 		this.z = float.Parse(parsedLine [2]) * distanceScale;
 		
-		// DEFINE ELEMENTS HERE
-		// switch statement based on chemical symbol
+		// Define element characteristics here
 		switch (this.symbol) {
 		case "H":
 			this.name = "Hydrogren";
@@ -44,10 +45,75 @@ public class Element
 			this.name = "Oxygen";
 			this.radii = 48;
 			break;
-
+			
+		case "F":
+			this.name = "Fluorine";
+			this.radii = 42;
+			break;
+			
+		case "NA":
+			this.name = "Sodium";
+			this.radii = 190;
+			break;
+			
+		case "MG":
+			this.name = "Magnesium";
+			this.radii = 145;
+			break;
+			
+		case "SI":
+			this.name = "Silicon";
+			this.radii = 111;
+			break;
+			
 		case "P":
-			this.name = "phosphorus";
+			this.name = "Phosphorus";
 			this.radii = 98;
+			break;
+			
+		case "S":
+			this.name = "Sulfur";
+			this.radii = 88;
+			break;
+			
+		case "CL":
+			this.name = "Chlorine";
+			this.radii = 79;
+			break;
+			
+		case "CA":
+			this.name = "Calcium";
+			this.radii = 194;
+			break;
+			
+		case "FE":
+			this.name = "Iron";
+			this.radii = 156;
+			break;
+			
+		case "ZN":
+			this.name = "Zinc";
+			this.radii = 142;
+			break;
+			
+		case "BR":
+			this.name = "Bromine";
+			this.radii = 94;
+			break;
+			
+		case "CD":
+			this.name = "cadmium";
+			this.radii = 161;
+			break;
+			
+		case "I":
+			this.name = "Iodine";
+			this.radii = 115;
+			break;
+			
+		default:
+			this.name = "Unknown";
+			this.radii = 75;
 			break;
 		}
 
