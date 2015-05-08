@@ -50,7 +50,7 @@ public class CameraController : MonoBehaviour {
 //		if (true) {
 		if (!hands.IsEmpty && firstHandDelta.magnitude>1) {
 			cam.transform.RotateAround (target.transform.position, new Vector3(0,firstHandDelta.x,0), firstHandDelta.magnitude);
-		
+//			cam.transform.RotateAround (target.transform.position, new Vector3(firstHandDelta.y,0,0), firstHandDelta.magnitude);
 		}
 		else if (hands.IsEmpty) {
 			cam.transform.RotateAround (target.transform.position, new Vector3(0,1,0) , 1);
