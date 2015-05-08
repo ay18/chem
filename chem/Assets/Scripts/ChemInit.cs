@@ -2,6 +2,7 @@
 using System.Collections;
 using System.IO;
 using System.Text;
+using UnityEngine.UI;
 
 
 // Initializer and main controller
@@ -9,19 +10,37 @@ public class ChemInit : MonoBehaviour
 {
 	
 	public Transform AtomTransform;
-	private CameraController camCtrl;
+	float [] molDim = null;
+	private CameraController camCtrl = null;
+	private bool fileLoaded = false;
+	private GameObject atomContainer = null;
+	[SerializeField] private InputField input;
 
 	// Use this for initialization
 	void Start ()
 	{	
 		Debug.Log ("loadChemScript called");
-		loadFile ("Assets/sdf/atp.sdf");
+		molDim = new float[6] {0,0,0,0,0,0};
+		camCtrl = new CameraController(molDim);
+		atomContainer = GameObject.Find("/AtomContainer");
+		input.onEndEdit.AddListener (attemptLoadMolecule);
+		//fileLoaded = loadFile ("Assets/Resources/sdf/atp.sdf");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		camCtrl.trackFrame ();
-		camCtrl.cameraOrbit();
+		if (fileLoaded) {
+			camCtrl.trackFrame ();
+			camCtrl.cameraOrbit ();
+		}
+	}
+
+	private void attemptLoadMolecule(string s) {
+		foreach (Transform child in atomContainer.transform) {
+			GameObject.Destroy(child.gameObject);
+		}
+		Debug.Log ("submit: " + s);
+		fileLoaded = loadFile ("Assets/Resources/sdf/"+s);
 	}
 
 	private bool loadFile (string filePath)
@@ -34,9 +53,8 @@ public class ChemInit : MonoBehaviour
 			int bonds = 0;
 			int lineNum = 1;
 			// molecule dimensions, min and max for x y z
-			float[] molDim = new float[6];
 			// game object to group atoms
-			GameObject atomContainer = GameObject.Find("/AtomContainer");
+
 			StreamReader sr = new StreamReader (filePath);
 
 			while (!sr.EndOfStream) {
@@ -59,7 +77,6 @@ public class ChemInit : MonoBehaviour
 			}
 
 			// Dimension updated at this point, initialize camera controller
-			camCtrl = new CameraController(molDim);
 			camCtrl.adjustCameraPosition();
 
 			return true;
