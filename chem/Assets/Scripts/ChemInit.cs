@@ -73,6 +73,7 @@ public class ChemInit : MonoBehaviour
 	// In SDF files, first three lines not important
 	private bool renderAtomFromLine (string[] parsedLine, GameObject container)
 	{
+		Shader atomShader;
 		Element e = new Element(parsedLine);
 
 		// this part is kind of weird
@@ -86,21 +87,61 @@ public class ChemInit : MonoBehaviour
 		atom.GetComponent<Rigidbody> ().useGravity = false;
 		switch (e.symbol) {
 		case "H":
-			atom.GetComponent<Renderer> ().material.color = Color.blue;
+			atomShader = Shader.Find("Custom/hydrogenShader");
 			break;
 		case "C":
-			atom.GetComponent<Renderer> ().material.color = Color.white;
-			break;
-		case "O":
-			atom.GetComponent<Renderer> ().material.color = Color.red;
+			atomShader = Shader.Find("Custom/carbonShader");
 			break;
 		case "N":
-			atom.GetComponent<Renderer> ().material.color = Color.yellow;
+			atomShader = Shader.Find("Custom/nitrogenShader");
+			break;
+		case "O":
+			atomShader = Shader.Find("Custom/oxygenShader");
+			break;
+		case "F":
+			atomShader = Shader.Find("Custom/fluorineShader");
+			break;
+		case "NA":
+			atomShader = Shader.Find("Custom/sodiumShader");
+			break;
+		case "Mg":
+			atomShader = Shader.Find("Custom/magnesiumShader");
+			break;
+		case "SI":
+			atomShader = Shader.Find("Custom/siliconShader");
 			break;
 		case "P":
-			atom.GetComponent<Renderer> ().material.color = Color.grey;
+			atomShader = Shader.Find("Custom/phosphorousShader");
+			break;
+		case "S":
+			atomShader = Shader.Find("Custom/sulfurShader");
+			break;
+		case "CL":
+			atomShader = Shader.Find("Custom/chlorineShader");
+			break;
+		case "CA":
+			atomShader = Shader.Find("Custom/calciumShader");
+			break;
+		case "FE":
+			atomShader = Shader.Find("Custom/ironShader");
+			break;
+		case "ZN":
+			atomShader = Shader.Find("Custom/zincShader");
+			break;
+		case "BR":
+			atomShader = Shader.Find("Custom/bromineShader");
+			break;
+		case "CD":
+			atomShader = Shader.Find("Custom/cadmiumShader");
+			break;
+		case "I":
+			atomShader = Shader.Find("Custom/iodineShader");
+			break;
+		default:
+			atomShader = Shader.Find("Custom/unknownShader");
 			break;
 		}
+		atom.GetComponent<Renderer>().material.shader = atomShader;
 
 		return true;
 	}

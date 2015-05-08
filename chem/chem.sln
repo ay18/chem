@@ -1,6 +1,8 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
+Project("{C4614823-8A91-FC7E-688F-B961F54CDD02}") = "chem", "Assembly-CSharp-firstpass.csproj", "{E09DE644-B820-A5E5-78B7-4216A5F31ECC}"
+EndProject
 Project("{C4614823-8A91-FC7E-688F-B961F54CDD02}") = "chem", "Assembly-CSharp.csproj", "{D6BFD095-881C-14F9-5C94-CC5DC9445C2E}"
 EndProject
 Project("{C4614823-8A91-FC7E-688F-B961F54CDD02}") = "chem", "Assembly-CSharp-Editor.csproj", "{6E424026-30EB-0DFC-7B30-3251132F2D85}"
@@ -11,6 +13,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E09DE644-B820-A5E5-78B7-4216A5F31ECC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E09DE644-B820-A5E5-78B7-4216A5F31ECC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E09DE644-B820-A5E5-78B7-4216A5F31ECC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E09DE644-B820-A5E5-78B7-4216A5F31ECC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D6BFD095-881C-14F9-5C94-CC5DC9445C2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D6BFD095-881C-14F9-5C94-CC5DC9445C2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6BFD095-881C-14F9-5C94-CC5DC9445C2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -23,7 +29,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																			GlobalSection(MonoDevelopProperties) = preSolution
+																																																									GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1

@@ -23,8 +23,9 @@ public class CameraController : MonoBehaviour {
 		Zmax = moleculeDimension [5];
 
 		Vector3 centerCoords = new Vector3( Util.average(Xmin,Xmax), Util.average(Ymin,Ymax), Util.average(Zmin,Zmax) );
-		target = new GameObject ();
+		target = new GameObject ("Target");
 		target.transform.position = centerCoords;
+		cam.transform.parent = target.transform;
 	}
 
 
@@ -43,14 +44,23 @@ public class CameraController : MonoBehaviour {
 	// Orbits (rotates) camera depending on hand movement
 	public void cameraOrbit() {
 		HandList hands = currentFrame.Hands;
-		cam.transform.LookAt (target.transform);
+		Rigidbody camRigidbody = cam.GetComponent<Rigidbody>();
 		Vector3 firstHandDelta = findHandDelta (hands [0]);
+
+//		if (true) {
 		if (!hands.IsEmpty && firstHandDelta.magnitude>1) {
-			cam.transform.RotateAround (target.transform.position, new Vector3(1,1,0), firstHandDelta.magnitude);
+			cam.transform.RotateAround (target.transform.position, new Vector3(0,firstHandDelta.x,0), firstHandDelta.magnitude);
+		
 		}
 		else if (hands.IsEmpty) {
-			cam.transform.RotateAround (target.transform.position, Vector3.up, 1);
+			cam.transform.RotateAround (target.transform.position, new Vector3(0,1,0) , 1);
 		}
+		cam.transform.LookAt (target.transform);
+	}
+
+	Vector3 findHandPosition (Hand h) {
+		Vector leapVec = h.PalmPosition;
+		return new Vector3 (leapVec.x, leapVec.y, leapVec.z);
 	}
 
 	Vector3 findHandDelta (Hand h) {
