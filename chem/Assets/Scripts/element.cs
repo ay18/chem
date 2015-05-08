@@ -44,6 +44,11 @@ public class Element
 			this.name = "Oxygen";
 			this.radii = 48;
 			break;
+
+		case "P":
+			this.name = "phosphorus";
+			this.radii = 98;
+			break;
 		}
 
 		this.radii = radii*scaleFactor;

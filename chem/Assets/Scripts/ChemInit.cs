@@ -7,12 +7,12 @@ public class ChemInit : MonoBehaviour
 {
 	
 	public Transform AtomTransform;
-	
+
 	// Use this for initialization
 	void Start ()
 	{	
 		Debug.Log ("loadChemScript called");
-		loadFile ("Assets/sdf/caffeine.sdf");
+		loadFile ("Assets/sdf/atp.sdf");
 	}
 	
 //	// Update is called once per frame
@@ -23,15 +23,17 @@ public class ChemInit : MonoBehaviour
 	private bool loadFile (string filePath)
 	{
 		try {
+
+			// Variables
 			string line;
 			string[] parsedLine;
 			int atoms = 0;
 			int bonds = 0;
 			int lineNum = 1;
-
 			// molecule dimensions, min and max for x y z
 			float[] molDim = new float[6];
-
+			// game object to group atoms
+			GameObject atomContainer = GameObject.Find("/AtomContainer");
 			StreamReader sr = new StreamReader (filePath);
 
 			while (!sr.EndOfStream) {
@@ -51,7 +53,7 @@ public class ChemInit : MonoBehaviour
 				else if (lineNum > 4 && lineNum <= (4+atoms) ) {
 					// molDim contains min and max for x y z
 					updateDimensions(ref molDim[0], ref molDim[1], ref molDim[2], ref molDim[3], ref molDim[4], ref molDim[5], parsedLine);
-					renderAtomFromLine(parsedLine);
+					renderAtomFromLine(parsedLine, atomContainer);
 				}
 				lineNum++;
 			}
@@ -69,28 +71,34 @@ public class ChemInit : MonoBehaviour
 
 	// lineType specifies the part of an xyz file being read in.
 	// In SDF files, first three lines not important
-	private bool renderAtomFromLine (string[] parsedLine)
+	private bool renderAtomFromLine (string[] parsedLine, GameObject container)
 	{
 		Element e = new Element(parsedLine);
 
-		Transform h = Instantiate (AtomTransform, new Vector3 (e.x, e.y, e.z), Quaternion.identity) as Transform;
-		GameObject hAtom = h.gameObject;
-		hAtom.name = e.symbol;
-		h.localScale = new Vector3 (e.radii, e.radii, e.radii);
+		// this part is kind of weird
+		// atom game objects created from a transform, instead of other way around
+		Transform at = Instantiate (AtomTransform, new Vector3 (e.x, e.y, e.z), Quaternion.identity) as Transform;
+		GameObject atom = at.gameObject;
+		atom.name = e.name;
+		at.parent = container.transform;
+		at.localScale = new Vector3 (e.radii, e.radii, e.radii);
 
-		hAtom.GetComponent<Rigidbody> ().useGravity = false;
+		atom.GetComponent<Rigidbody> ().useGravity = false;
 		switch (e.symbol) {
 		case "H":
-			hAtom.GetComponent<Renderer> ().material.color = Color.blue;
+			atom.GetComponent<Renderer> ().material.color = Color.blue;
 			break;
 		case "C":
-			hAtom.GetComponent<Renderer> ().material.color = Color.white;
+			atom.GetComponent<Renderer> ().material.color = Color.white;
 			break;
 		case "O":
-			hAtom.GetComponent<Renderer> ().material.color = Color.red;
+			atom.GetComponent<Renderer> ().material.color = Color.red;
 			break;
 		case "N":
-			hAtom.GetComponent<Renderer> ().material.color = Color.yellow;
+			atom.GetComponent<Renderer> ().material.color = Color.yellow;
+			break;
+		case "P":
+			atom.GetComponent<Renderer> ().material.color = Color.grey;
 			break;
 		}
 

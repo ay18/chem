@@ -23,8 +23,12 @@ public class CameraControl : MonoBehaviour {
 	public void adjustCameraPosition() {
 		// if the camera transform exists;
 		if (cam.transform) {
-			Debug.Log("X: "+Xmin+" "+Xmax+" Y: "+Ymin+" "+Ymax+" Z: "+Zmin+" "+Zmax);
-			Vector3 newPosition = new Vector3(0,0,Zmin-10);
+			debugPrintDimensions();
+
+			Vector3 center = new Vector3( Util.average(Xmin,Xmax), Util.average(Ymin,Ymax), Util.average(Zmin,Zmax) );
+			Vector3 newPosition = new Vector3(0, 0, -10);
+			Debug.Log ("New Position: " + newPosition);
+
 			cam.transform.position = newPosition;
 		}
 	}
@@ -41,6 +45,10 @@ public class CameraControl : MonoBehaviour {
 		if (firstHand.IsValid) {
 			Debug.Log(firstHand.Translation(pf));
 		}
+	}
+
+	void debugPrintDimensions() {
+		Debug.Log("X: "+Xmin+" "+Xmax+" Y: "+Ymin+" "+Ymax+" Z: "+Zmin+" "+Zmax);
 	}
 
 }
