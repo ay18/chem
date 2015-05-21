@@ -5,7 +5,7 @@ by Stanley Chan and Andy Yee*
 ![chem gif](https://github.com/sksea/chem/raw/master/chem.gif)
 
 ### Description
-*Chem* is our end-of-semester project for a class whose overarching theme was to explore untraditional platforms (read non-desktop). This project incorporates Unity 5 and Leap Motion to create an app which parses [.sdf files](http://en.wikipedia.org/wiki/Chemical_table_file) and presents those molecules in 3D. The user can then interact with the molecule using hand gestures, for things such as viewing the molecule at different angles.
+*Chem* is our end-of-semester project for a class whose overarching theme was to explore untraditional platforms (read non-desktop). This project incorporates Unity 5 and Leap Motion to create an app which parses [.sdf files](http://en.wikipedia.org/wiki/Chemical_table_file) and presents those molecules in 3D. The user can then interact with the molecule using hand gestures via Leap Motion.
 
 ### Known Bugs
 Due to time constraints, the following are known issues:
