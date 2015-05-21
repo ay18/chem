@@ -11,5 +11,5 @@ by Stanley Chan and Andy Yee*
 Due to time constraints, the following are known issues:
 * **Project works in dev/preview mode for unity, but not after being built.**   
    *Cause: Unity apps don't have permission to read from disk after being built. Unity allows loading in text assets, but considering .sdf is not one of the supported formats, our files might need to be coverted to .txt first.*
-* **Only horizontal rotations of molecules is allowed, as opposed to rotating the molecule in all 3-axis.**   
+* **Only horizontal rotations of molecules is allowed, as opposed to rotating the molecule in 3 axes.**   
    *Cause: Bad camera implementation our part. We have it so the molecules are stationary with "orbiting" camera. Unfortunately, we couldn't figure out how to make the camera object travel on a spherical path.*
