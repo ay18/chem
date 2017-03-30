@@ -2,7 +2,7 @@
 *2015 Project for CS476 (Emerging Platforms)  
 by Stanley Chan and Andy Yee*  
 
-![chem gif](https://github.com/sksea/chem/raw/master/chem.gif)
+![chem gif](https://raw.githubusercontent.com/sksea/i/master/chem.gif)
 
 ### Description
 *Chem* is our end-of-semester project for a class whose overarching theme was to explore untraditional platforms (read non-desktop). This project incorporates Unity 5 and Leap Motion to create an app which parses [.sdf files](http://en.wikipedia.org/wiki/Chemical_table_file) and presents those molecules in 3D. The user can then interact with the molecule using hand gestures via Leap Motion.
